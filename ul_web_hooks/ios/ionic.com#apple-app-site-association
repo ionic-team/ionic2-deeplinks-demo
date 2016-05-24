@@ -1,0 +1,13 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "9YN2HU59K8.com.ionicframework.ionic2deeplinkingdemo769002",
+        "paths": [
+          "/universal-links-test"
+        ]
+      }
+    ]
+  }
+}
