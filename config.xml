@@ -34,7 +34,7 @@
   <plugin name="ionic-plugin-keyboard" spec="~2.2.0"/>
 
   <universal-links>
-    <host name="ionic.com">
+    <host name="ionic.io">
       <path url="/universal-links-test" />
     </host>
   </universal-links>
