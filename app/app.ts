@@ -4,6 +4,7 @@ import {App, Platform, Nav, NavController} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {AboutPage} from './pages/about/about';
+import {ProductPage} from './pages/product/product';
 
 declare var IonicDeeplink:any;
 
@@ -26,8 +27,27 @@ export class MyApp {
 
   ngAfterViewInit() {
     this._platform.ready().then(() => {
-      IonicDeeplink.init(this.navChild, {
-        '/about-us': AboutPage
+      /*
+      IonicDeeplink.route({
+        '/about-us': AboutPage,
+        '/universal-links-test': AboutPage,
+        '/products/:productId': ProductPage
+      }, function(match) {
+        // Handle the route manually
+      }, function() {
+        // No match
+      })
+      */
+
+      // Convenience to route with a given nav
+      IonicDeeplink.routeWithNavController(this.navChild, {
+        '/about-us': AboutPage,
+        '/universal-links-test': AboutPage,
+        '/products/:productId': ProductPage
+      }, (routeInfo, args) => {
+        console.log('Successfully routed', routeInfo, args);
+      }, (routeInfo) => {
+        console.error('Unable to route', routeInfo);
       });
     })
   }
