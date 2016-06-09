@@ -1,12 +1,10 @@
 import {ViewChild} from '@angular/core';
 
 import {App, Platform, Nav, NavController} from 'ionic-angular';
-import {StatusBar} from 'ionic-native';
+import {StatusBar, Deeplinks} from 'ionic-native';
 import {HomePage} from './pages/home/home';
 import {AboutPage} from './pages/about/about';
 import {ProductPage} from './pages/product/product';
-
-declare var IonicDeeplink:any;
 
 @App({
   template: '<ion-nav [root]="rootPage"></ion-nav>',
@@ -34,20 +32,20 @@ export class MyApp {
         '/products/:productId': ProductPage
       }, function(match) {
         // Handle the route manually
-      }, function() {
+      }, function(nomatch) {
         // No match
       })
       */
 
       // Convenience to route with a given nav
-      IonicDeeplink.routeWithNavController(this.navChild, {
+      Deeplinks.routeWithNavController(this.navChild, {
         '/about-us': AboutPage,
         '/universal-links-test': AboutPage,
         '/products/:productId': ProductPage
-      }, (routeInfo, args) => {
-        console.log('Successfully routed', routeInfo, args);
-      }, (routeInfo) => {
-        console.error('Unable to route', routeInfo);
+      }).subscribe((match) => {
+        console.log('Successfully routed', match);
+      }, (nomatch) => {
+        console.warn('Unmatched Route', nomatch);
       });
     })
   }
